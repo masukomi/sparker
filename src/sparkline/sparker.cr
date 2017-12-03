@@ -39,7 +39,7 @@ module Sparkline
     # 75-87:"▆"
     # 87-99:"▇"
     # 100  :"█"
-    def generate(ints : Array(Int32), fit_min : Bool = false) : String
+    def generate(ints : Array(Int32 | Int64), fit_min : Bool = false) : String
       min_range = fit_min ? ints.min : 0
       step_range = ints.max - min_range
       step = step_range.to_f / (@ticks.size - 1).to_f
