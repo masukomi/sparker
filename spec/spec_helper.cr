@@ -1,2 +1,2 @@
 require "spec"
-require "../src/crystal_spark"
+require "../src/sparker.cr"
