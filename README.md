@@ -34,6 +34,7 @@ dependencies:
 
 ```crystal
 require 'sparker'
+include Sparkline
 
 sparker = Sparker.new() 
 sparker.generate([1, 5, 22, 13, 53])             #=> "  ▃▁█"
