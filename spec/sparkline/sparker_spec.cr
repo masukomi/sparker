@@ -47,7 +47,7 @@ describe Sparker do
   end
 
   it "should be able to generate with Int64 numbers" do
-    sparker = Sparker.new()
+    sparker = Sparker.new
     sparker.generate([Int64.new(0), Int64.new(100)])
   end
 end
