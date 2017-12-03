@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/masukomi/sparker.svg?branch=master)](https://travis-ci.org/masukomi/sparker)
+
+
 # Sparker
 ### Better Sparklines for Crystal
 
