@@ -3,7 +3,8 @@ module Sparkline
   # and https://github.com/holman/spark
 
   class Sparker
-    TICKS = " ▁▂▃▄▅▆▇█".split("")
+    TICKS   = " ▁▂▃▄▅▆▇█".split("")
+    TICKS_2 = "܂▁▂▃▄▅▆▇█".split("")
     getter :ticks
     setter :ticks
 
