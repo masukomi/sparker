@@ -45,19 +45,27 @@ Want to use your own characters for the graph? Just initialize it with
 an array of them.
 
 ```crystal
-sparker = Sparkline::Sparker.new(["aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii"]) 
+sparker = Sparker.new(["aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii"]) 
 sparker.generate([0, 30, 55, 80, 33, 150]) # => "aabbcceebbii"
 ```
 
 Ok, that example wasn't the most useful, but you're a clever person. I'm sure
 you can think up something cool to do with that.
 
+If you don't like the nothingness of the zero tick mark there's an alternate 
+set of ticks built in with a tiny dot (`U+0702`) instead. 
+
+```crystal
+sparker = Sparker.new(Sparker::TICKS_2) # => "܂▁▂▃▄▅▆▇█"
+sparker.generate [0, 30, 55, 80, 33, 150] # => "܂▁▂▄▁█"
+```
+
 As I mentioned above, you can turn on data fitting.When it's time to generate
 your graph, just pass in a second parameter of `true` to enable that feature.
 
 ```crystal
 # with data fitting
-sparker.generate([88,100], true)    #=>" █"
+sparker.generate([88,100], true)    # =>" █"
 # without data fitting
 sparker.generate([88,100], false)   # => "▇█"
 # with data fitting
