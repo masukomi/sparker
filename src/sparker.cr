@@ -1,1 +1,0 @@
-require "./sparkline/sparker.cr"
