@@ -3,8 +3,15 @@ Signal::INT.trap do
   exit 0
 end
 # END Handle ^C
+STDIN.read_timeout = 0.1
 
 require "./sparkline/*"
+
+def usage()
+  STDERR.puts "Usage: sparkline <comma separated integers> [fit]"
+  STDERR.puts "      if \"fit\" is specified data-fitting will"
+  STDERR.puts "      be applied."
+end
 
 if File.basename(PROGRAM_NAME) != "crystal-run-spec.tmp"
   sparker = Sparkline::Sparker.new()
@@ -16,17 +23,17 @@ if File.basename(PROGRAM_NAME) != "crystal-run-spec.tmp"
       puts sparker.generate(numbers, ARGV[1] == "fit")
     end
   else
-    # assume input on STDIN 
-    # Can't find any docs on how to NOT hang if there isn't any
-    while (line = ARGF.gets) != nil
-      numbers = line.as(String).split(/,\s*/).map{|x|x.to_i}
+    begin
+      numbers = ARGF.gets_to_end.gsub(/\r\n|\n/, "").split(/,\s*/).map{|x|
+        x == "" ? 0 : x.to_i}
+
+      # while (line = ARGF.gets) != nil
+      #   numbers = line.as(String).split(/,\s*/).map{|x|x.to_i}
       puts sparker.generate(numbers)
+      # end
+    rescue IO::Timeout
+      usage()
+      exit(1)
     end
-  # else 
-  # WHEN I FIGURE OUT HOW  TO NOT HANG IF THERE'S NO STDIN
-  #   STDERR.puts "Usage: sparkline <comma separated integers> [fit]"
-  #   STDERR.puts "      if \"fit\" is specified data-fitting will"
-  #   STDERR.puts "      be applied."
-  #   exit(1)
   end
 end
