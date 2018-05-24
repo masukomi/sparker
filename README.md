@@ -1,12 +1,49 @@
 [![Build Status](https://travis-ci.org/masukomi/sparker.svg?branch=master)](https://travis-ci.org/masukomi/sparker)
 
-
 # Sparker
 ### Better Sparklines for Crystal
 
-Sparker takes an array of integers and converts it into a graph
-suitable for use in command line tools.
+There are 2 parts to this.
 
+* A library for adding sparkline capabilities to your command line apps
+* A small executable that generates sparklines from your input
+
+## The Executable
+
+### Building
+```
+crystal build src/sparkline.cr
+```
+
+This will build a `sparkline` executable in the current directory. Just put it
+somewhere in your PATH and you're done.
+
+### Using
+You can either pipe in a bunch of comma separate integers
+
+```
+echo "23, 64, 100" | sparkline # => ▁▅█
+```
+
+or you can pass them in as the first argument
+
+```
+sparkline "23, 64, 100" # => ▁▅█
+```
+
+If you pass them in as the first option you can also apply data fitting by
+passing "fit" as the second argument.
+
+```
+sparkline "23, 88, 100" fit # =>  ▄█
+```
+
+## The Library
+
+The Sparker clas takes an array of integers and converts it into a graph
+suitable for use in command line tools. It allows for custom characters for your
+graph. You could even get really funky and have HTML + CSS for each "character"
+and generate html graphs from command line data. 
 
 (NOTE: The HTML version of these examples have a weirdly uneven baseline 
 in many browsers. Not to worry. They'll look great on your command line.)
